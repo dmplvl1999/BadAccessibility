@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private boolean loginState = true;
     private TextView textView;
-    //private Malware myService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void areServicesEnabled() {
         if (!isAccessServiceEnabled()) {
             //If accessibility is not enabled then it goes to the settings to make the user enable it

@@ -7,3 +7,4 @@ public interface acess {
     @GET("posts")
     Call<Void> successGet();
 }
+
