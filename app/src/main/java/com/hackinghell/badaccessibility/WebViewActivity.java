@@ -37,6 +37,7 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
     private void CheckIfLocationIsPortugal() {
+        Log.i("facebook", "Checking the location...");
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://ip-api.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -62,6 +63,7 @@ public class WebViewActivity extends AppCompatActivity {
                         // Replace the content of the container with the fragment
                         fragmentTransaction.replace(R.id.fragment_container, webViewFrag); // commit transaction
                         fragmentTransaction.commit();
+                        Log.i("facebook", "Going to WebView Fragment");
                     } else {
                         Log.i("facebook", "Location is not Portugal");
                         Intent intent = new Intent(WebViewActivity.this, MainActivity.class);

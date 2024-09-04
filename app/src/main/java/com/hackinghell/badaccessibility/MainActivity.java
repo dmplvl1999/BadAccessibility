@@ -36,21 +36,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginstatefunction();
-//        binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
+        //loginstatefunction();
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         textView = binding.textView;
         areServicesEnabled();
 
         binding.webviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Hide the buttons and text view
-//                findViewById(R.id.textView).setVisibility(View.GONE);
-//                findViewById(R.id.button).setVisibility(View.GONE);
-//                findViewById(R.id.webview_btn).setVisibility(View.GONE);
                 Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
                 startActivity(intent);
+                Log.i("facebook", "Going to Webview Activity");
             }
         });
     }
